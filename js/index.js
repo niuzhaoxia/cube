@@ -8,15 +8,20 @@ function changeFontSize() {
 }
 changeFontSize()
 
-$('body').on('touchmove', function (event) {
-    event.preventDefault()
-}, {passive: false})
+document.body.addEventListener('touchmove', function (e) {
+    e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+}, {
+    passive: false
+}); //passive 参数不能省略，用来兼容ios和android
 
 $('.container').on("touchstart", touchStart).on("touchmove", touchMove).on("touchend", touchEnd)
 
 function touchStart(event) {
     $('.tip').text('开始触摸')
-    var {X: startX, Y: startY} = getTouchPoint(event)
+    var {
+        X: startX,
+        Y: startY
+    } = getTouchPoint(event)
     startObj.x = startX
     startObj.y = startY
     this.prePoint = startObj
@@ -24,9 +29,12 @@ function touchStart(event) {
 }
 
 function touchMove(event) {
-    this.count ++   
+    this.count++
     if (this.count > 10) {
-        var {X: moveX, Y: moveY} = getTouchPoint(event)
+        var {
+            X: moveX,
+            Y: moveY
+        } = getTouchPoint(event)
         var deg = computeDeg(this.prePoint, {
             x: moveX,
             y: moveY
@@ -40,7 +48,10 @@ function touchMove(event) {
 }
 
 function touchEnd(event) {
-    var {X: endX, Y: endY} = getTouchPoint(event)
+    var {
+        X: endX,
+        Y: endY
+    } = getTouchPoint(event)
     endObj.x = endX
     endObj.y = endY
     // debugger
@@ -49,14 +60,16 @@ function touchEnd(event) {
     deg *= this.speed || (this.speed = 0)
     $('.cube')[0].style.transform = `rotate3d(${rotatePrams}, ${deg}deg)`
     event.stopPropagation()
-    $('.tip').text('离开屏幕' + `spend ${this.speed}`+ `rotate3d(${rotatePrams}, ${deg}deg)`)
+    $('.tip').text('离开屏幕' + `spend ${this.speed}` + `rotate3d(${rotatePrams}, ${deg}deg)`)
 }
 
 // Computing path degree
 function computeDeg(startOrigin, endOrigin) {
     var x = startOrigin.x - endOrigin.x
     var y = startOrigin.y - endOrigin.y
-    while (x == y) {x += 0.01}
+    while (x == y) {
+        x += 0.01
+    }
     var tan = x / y
     var deg = parseInt(180 / Math.PI * Math.atan(tan))
     return Math.abs(deg)
@@ -83,14 +96,17 @@ function rotateDirection(startOrigin, endOrigin) {
     return `${x}, ${y}, 0`
 }
 
-function computedSpeed (startX, endX, deg) {
+function computedSpeed(startX, endX, deg) {
     var speed = Math.abs((endX - startX) / Math.sin(deg))
     speed = Math.ceil(speed / 10)
     return speed
 }
 
-function getTouchPoint (event) {
+function getTouchPoint(event) {
     var X = parseInt(event.originalEvent.changedTouches[0].clientX)
     var Y = parseInt(event.originalEvent.changedTouches[0].clientY)
-    return {X, Y}
+    return {
+        X,
+        Y
+    }
 }

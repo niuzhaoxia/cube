@@ -18,7 +18,7 @@ html, body {
     height: 1rem;
     position: relative;
     margin: 0 auto;
-    /* transform:rotate3d(1, 1, 1, -45deg); */
+    transform:rotate3d(1, 1, 1, -45deg);
     perspective: none;
     perspective-origin: 50% 50%;
     transform-style: preserve-3d;
