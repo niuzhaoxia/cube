@@ -8,6 +8,10 @@ function changeFontSize() {
 }
 changeFontSize()
 
+$('body').on('touchmove', function (event) {
+    event.preventDefault()
+}, {passive: false})
+
 $('.container').on("touchstart", touchStart).on("touchmove", touchMove).on("touchend", touchEnd)
 
 function touchStart(event) {
