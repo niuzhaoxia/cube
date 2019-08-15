@@ -1,0 +1,77 @@
+html, body {
+    font-size: 100px;
+    width: 100%;
+    height: 100%;
+}
+
+.container{
+    height: 100%;
+    background-color: rgb(248, 230, 233);
+    position: relative;
+    padding-top: 1.5rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.cube {
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+    margin: 0 auto;
+    /* transform:rotate3d(1, 1, 1, -45deg); */
+    perspective: none;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: 2s;
+}
+.cube > div {
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: center;
+    text-align: center;
+    line-height: 1rem;
+    font-size: .24rem;
+}
+.cube_font {
+    background-color: red;
+    transform: translate3d(0px, 0px, .5rem);
+}
+
+.cube_after {
+    color: white;
+    background-color: black;
+    transform: translate3d(0px, 0px, -.5rem);
+}
+
+.cube_left{
+    background-color: blue;
+    transform: translate3d(-.5rem, 0px, 0px) rotate3d(0, 1, 0, 90deg);
+}
+
+.cube_right {
+    background-color: yellow;
+    transform: translate3d(.5rem, 0px, 0px) rotate3d(0, 1, 0, -90deg);
+}
+
+.cube_up {
+    background-color: green;
+    transform: translate3d(0, -.5rem, 0px) rotate3d(1, 0, 0, -90deg);
+}
+
+.cube_under {
+    background-color: white;
+    transform: translate3d(0, .5rem, 0px) rotate3d(1, 0, 0, 90deg);
+}
+
+.tip {
+    width: 100%;
+    position: absolute;
+    bottom: .5rem;
+    left: 0;
+    text-align: center;
+    font-size: .18rem;
+}
