@@ -54,7 +54,6 @@ function touchEnd(event) {
     } = getTouchPoint(event)
     endObj.x = endX
     endObj.y = endY
-    // debugger
     var deg = computeDeg(startObj, endObj)
     var rotatePrams = rotateDirection(startObj, endObj)
     deg *= this.speed || (this.speed = 0)
@@ -67,17 +66,24 @@ function touchEnd(event) {
 function computeDeg(startOrigin, endOrigin) {
     var x = startOrigin.x - endOrigin.x
     var y = startOrigin.y - endOrigin.y
-    while (x == y) {
-        x += 0.01
-    }
-    var tan = x / y
-    var deg = parseInt(180 / Math.PI * Math.atan(tan))
-    return Math.abs(deg)
+    if (y != 0) {
+        var tan = x / y
+        var deg = parseInt(180 / Math.PI * Math.atan(tan))
+        return Math.abs(deg)
+    } else {
+        return 1
+    }   
 }
 
 function rotateDirection(startOrigin, endOrigin) {
     var x = startOrigin.x - endOrigin.x
     var y = startOrigin.y - endOrigin.y
+    if (x == 0) {
+        return `1, 0, 0`
+    }
+    if (y == 0) {
+        return `0, 1, 0`
+    }
     if (y > 0) {
         if (x > 0) {
             y = -1
