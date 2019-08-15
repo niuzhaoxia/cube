@@ -17,7 +17,6 @@ function touchStart(event) {
     startObj.y = startY
     this.prePoint = startObj
     this.count = 0
-    console.log(1)
 }
 
 function touchMove(event) {
@@ -33,7 +32,6 @@ function touchMove(event) {
         this.prePoint.y = moveY
         this.count = 0
     }
-    console.log(2)
     $('.tip').text('滑动中')
 }
 
@@ -46,8 +44,8 @@ function touchEnd(event) {
     var rotatePrams = rotateDirection(startObj, endObj)
     deg *= this.speed || (this.speed = 0)
     $('.cube')[0].style.transform = `rotate3d(${rotatePrams}, ${deg}deg)`
+    event.stopPropagation()
     $('.tip').text('离开屏幕' + `spend ${this.speed}`+ `rotate3d(${rotatePrams}, ${deg}deg)`)
-    console.log(3)
 }
 
 // Computing path degree
@@ -83,7 +81,7 @@ function rotateDirection(startOrigin, endOrigin) {
 
 function computedSpeed (startX, endX, deg) {
     var speed = Math.abs((endX - startX) / Math.sin(deg))
-    speed = Math.ceil(speed / 100)
+    speed = Math.ceil(speed / 10)
     return speed
 }
 
